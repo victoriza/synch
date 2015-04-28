@@ -1,17 +1,17 @@
-<h1>Build a Simple Android Calling App with Sinch</h1>
+<h1>Build a Simple Android Calling App With Sinch</h1>
 
-This tutorial will walk you through building a very simple Android VoIP calling app. It will look something like this when you are finished:</p>
+This tutorial will walk you through building a simple Android VoIP calling app. When you are finished, it will look something like this:</p>
 
 ![call and hangup](images/call-hangup.png)
        
        
-The completed source code for this tutorial is available at <a href="http://www.github.com/sinch/app-app-calling-android" target="_blank">github.com/sinch/app-app-calling-android</a></p>
+The completed source code for this tutorial is available at <a href="http://www.github.com/sinch/app-app-calling-android" target="_blank">github.com/sinch/app-app-calling-android</a>.</p>
 
-##Set Up
+##Setup
        
-First, you will need to create an new project in Android Studio. (You can use Eclipse if you like, but this tutorial was built and tested in Android Studio.)
+First, you will need to create a new project in Android Studio. (You can use Eclipse if you like, but this tutorial was built and tested in Android Studio.)
 
- To generate an API key and secret, create an app in the <a href="http://www.sinch.com/dashboard">Sinch Dashboard</a>. Name the app anything you like, and press "create." (You do not need a description or call control callback.)
+To generate an API key and secret, create an app in the <a href="http://www.sinch.com/dashboard">Sinch Dashboard</a>. Name the app anything you like, and press "create." (You do not need a description or call control callback.)
 
 ![new app button](images/new-app-button.png)
 		
@@ -22,14 +22,14 @@ Hold onto the key and secret from this app; you will use them in just a few minu
 Next, download the Sinch Android SDK from <a href="https://www.sinch.com/downloads/">www.sinch.com/downloads</a>. To add the Sinch SDK to your project:
 
   <ol>
-      <li>Copy the entire libs folder to your project’s root directory.</li>
-      <li>Right-click the jar-files and choose ‘Add As Library’.</li>
-      <li>Create a new folder under src/main and name it jniLibs.</li>
-      <li>Move the armeabi and armeabi-v7a folders into the newly created jniLibs folder.</li>
+      <li>Copy the entire libs folder to your project’s root directory</li>
+      <li>Right-click the jar-files and choose “Add As Library”</li>
+      <li>Create a new folder under src/main and name it jniLibs</li>
+      <li>Move the armeabi and armeabi-v7a folders into the newly created jniLibs folder</li>
   </ol>
 
 
-<p>Lastly, Sinch requires a few permissions. Head over <b>AndroidManifest.xml</b> and add the following:</p>
+<p>Sinch requires a few permissions. Head over to <b>AndroidManifest.xml</b> and add the following:</p>
 
 	<uses-feature
 	    android:name="android.hardware.microphone"
@@ -41,9 +41,9 @@ Next, download the Sinch Android SDK from <a href="https://www.sinch.com/downloa
 	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-##Make Outgoing Calls
+##Make outgoing calls
 
-<p>First, create a new xml file, and name it <b>call.xml</b>. Add a simple "Call" button:</p>
+<p>First, create a new .xml file, and name it <b>call.xml</b>. Add a simple "Call" button:</p>
 
 	<Button
 	    android:layout_width="fill_parent"
@@ -53,7 +53,7 @@ Next, download the Sinch Android SDK from <a href="https://www.sinch.com/downloa
 	    android:layout_centerVertical="true"
 	    android:layout_centerHorizontal="true" />
 
-<p>Now, create a new activity, <b>CallActivity</b>, where your user can make a phone call upon the click of the call button.</p>
+<p>Now, create a new activity, <b>CallActivity</b>, where your user can make a phone call with the click of the call button.</p>
 
 <p>Note: <b>In AndroidManifest.xml</b>, you should set</p>
 
@@ -81,7 +81,7 @@ android:screenOrientation="portrait"
 	        .environmentHost("sandbox.sinch.com")
 	        .build();
 
-<p>Make sure to fill in app-key and app-secret with the key and secret you generated when creating an app in the dashboard! Then, tell the sinch client that you want to have calling in your app, and finally, start the client:</p>
+<p>Make sure to fill in app key and app secret with the key and secret you generated when creating an app in the dashboard. Then, tell the SinchClient that you want to have calling in your app, and finally, start the client:</p>
 
     sinchClient.setSupportCalling(true); 
     sinchClient.start();
@@ -95,11 +95,11 @@ android:screenOrientation="portrait"
 <p>This app currently provides an awful user experience for the caller. Let's change that. Here is a list of things you will now add:</p>
 
 <ul>
-<li>allow the caller to hang up</li>
-<li>react accordingly when the call recipient hangs up</li>
-<li>let the caller control the volume of the call</li>
-<li>let the caller know when the call is ringing</li>
-<li>let the caller know when the call is connected</li>
+<li>Allow the caller to hang up</li>
+<li>React accordingly when the call recipient hangs up</li>
+<li>Let the caller control the volume of the call</li>
+<li>Let the caller know when the call is ringing</li>
+<li>Let the caller know when the call is connected</li>
 </ul>
 
 <p>To toggle the main button between "Call" and "Hang Up," start by storing the current call:</p>
@@ -149,19 +149,19 @@ android:screenOrientation="portrait"
 
 <p>Note: If you're curious about when each of these methods is called, this would be a good time to add some logging output or toast messages in SinchCallListener.</p>
 
-<p>First, since onCallEnded will get called if either party ends the phone call, you can move these two lines from your OnClickListener into onCallEnded:</p>
+<p>Since onCallEnded will get called if either party ends the phone call, you can move these two lines from your OnClickListener into onCallEnded:</p>
 
 	call = null;
 	button.setText("Call");
 
-<p>Next, you want the volume buttons to control the volume of the phone call while connected. Use the AudioManager provided by Android:</p>
+<p>To make the volume buttons control the volume of the phone call while connected, use the AudioManager provided by Android:</p>
 
     @Override
     public void onCallEstablished(Call establishedCall) {
         setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
     }
 
-<p>Then, to have the volume buttons go back to controlling the ringer volume when the phone call is disconnected:</p>
+<p>Then, to make the volume buttons go back to controlling the ringer volume when the phone call is disconnected:</p>
 
     @Override
     public void onCallEnded(Call endedCall) { 
@@ -182,7 +182,7 @@ android:screenOrientation="portrait"
 
     callState = (TextView) findViewById(R.id.callState);
 
-<p>Now, you can set the text to "ringing" in onCallRinging, and "connected" in onCallEstablished, and finally to "" in onCallEnded:</p>
+<p>Now, you can set the text to "ringing" in onCallRinging, and "connected" in onCallEstablished, and finally to " " in onCallEnded:</p>
 
 	//onCallProgressing
 	callState.setText("ringing");
@@ -193,9 +193,9 @@ android:screenOrientation="portrait"
 	//onCallEnded
 	callState.setText("");
 
-<p>Now your app has a much better user experience for the caller! Try making a call to the SDK sample app that you set up earlier.</p>
+<p>Now your app has a much better user experience. Try making a call to the SDK sample app that you set up earlier.</p>
 
-##Receive Incoming Calls
+##Receive incoming calls
 
 <p>For the purposes of this tutorial, your app will automatically accept incoming calls. To start, you want your SinchClient to listen for incoming calls. Add this right before you start the SinchClient:</p>
 
@@ -214,12 +214,12 @@ android:screenOrientation="portrait"
 
 <p>In onIncomingCall, you will need to do the following:</p>
 
-<ul>
- <li>set current call to incomingCall</li>
- <li>answer the call</li>
- <li>add a call listener to the current call</li>
- <li>set the button text to "hang up"</li>
-</ul>
+<ol>
+ <li>Set current call to incomingCall</li>
+ <li>Answer the call</li>
+ <li>Add a call listener to the current call</li>
+ <li>Set the button text to "hang up"</li>
+</ol>
 
 <p>Easy enough, right?</p>
 
@@ -228,17 +228,17 @@ android:screenOrientation="portrait"
 	call.addCallListener(new SinchCallListener());
 	button.setText("Hang Up");
 
-<p>To test the app now:</p>
+<p>To test the app:</p>
 
 <ol>
- <li>Set user id to 'a' and recipient id to 'b' (in your code)</li>
+ <li>Set user ID to “a” and recipient ID to “b” (in your code)</li>
  <li>Run the app on device #1</li>
- <li>Set user id to 'b' and recipient id to 'a' (in your code)</li>
+ <li>Set user ID to “b” and recipient ID to “a” (in your code)</li>
  <li>Run the app on device #2</li>
  <li>Chat away!</li>
 </ol>
   
-##Add Login
+##Add login
   
 <p>In this section, you are going to add a simple login screen so that users can call more than just one person. Your login screen will look like this:</p>
        
@@ -246,11 +246,11 @@ android:screenOrientation="portrait"
        
 <p>To set this up, you will need to do the following:</p>
   
-<ul>
+<ol>
  <li>Create a new activity, <b>LoginActivity</b></li>
  <li>Create layout for LoginActivity</li>
  <li>Pass callerId and recipientId to CallActivity as intent extras</li>
-</ul>
+</ol>
   
 <p>Start by creating a new activity, <b>LoginActivity</b>. In the view for this activity, you will need two EditTexts and a login button:</p>
        
@@ -301,7 +301,7 @@ android:screenOrientation="portrait"
 	callerId = intent.getStringExtra("callerId");
 	recipientId = intent.getStringExtra("recipientId");
 
-<p>Now you can use the callerId variable when starting the Sinch client, and recipientId when making a call!</p>
+<p>Now you can use the callerId variable when starting the SinchClient, and recipientId when making a call.</p>
   
-<p>If you have any questions, we're always available on Twitter <a href="http://www.twitter.com/sinchdev" target="_blank">@SinchDev</a>. You can also reach us via email at <a href="mailto:dev@sinch.com">dev@sinch.com</a></p>
+<p>If you have any questions, we're always available on Twitter <a href="http://www.twitter.com/sinchdev" target="_blank">@SinchDev</a>. You can also reach us via email at <a href="mailto:dev@sinch.com">dev@sinch.com</a>.</p>
 </div>
