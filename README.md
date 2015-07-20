@@ -1,8 +1,8 @@
-<h1>Build a Simple Android VoIP Calling App With Sinch</h1>
+#Build a Simple Android VoIP Calling App With Sinch
 
 This tutorial will walk you through building a simple Android VoIP calling app. When you are finished, it will look something like this:</p>
 
-![call and hangup](images/call-hangup.png)
+![voip tutorial for android calling screens](images/call-hangup.png)
        
 The completed source code for this tutorial is available at <a href="http://www.github.com/sinch/app-app-calling-android" target="_blank">github.com/sinch/app-app-calling-android</a>.</p>
 
@@ -302,5 +302,4 @@ android:screenOrientation="portrait"
 
 <p>Now you can use the callerId variable when starting the SinchClient, and recipientId when making a call.</p>
   
-<p>If you have any questions, we're always available on Twitter <a href="http://www.twitter.com/sinchdev" target="_blank">@SinchDev</a>. You can also reach us via email at <a href="mailto:dev@sinch.com">dev@sinch.com</a>.</p>
-</div>
+And that's it for this VoIP tutorial. If you have any questions, we're always available on Twitter <a href="http://www.twitter.com/sinchdev" target="_blank">@SinchDev</a>. You can also reach us via email at <a href="mailto:dev@sinch.com">dev@sinch.com</a>. Be sure to take a look at our other [tutorials](https://www.sinch.com/tutorials/).</div>
