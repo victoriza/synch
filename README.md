@@ -1,9 +1,8 @@
-<h1>Build a Simple Android Calling App With Sinch</h1>
+<h1>Build a Simple Android VoIP Calling App With Sinch</h1>
 
 This tutorial will walk you through building a simple Android VoIP calling app. When you are finished, it will look something like this:</p>
 
 ![call and hangup](images/call-hangup.png)
-       
        
 The completed source code for this tutorial is available at <a href="http://www.github.com/sinch/app-app-calling-android" target="_blank">github.com/sinch/app-app-calling-android</a>.</p>
 
